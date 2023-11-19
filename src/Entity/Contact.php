@@ -16,6 +16,7 @@ class Contact
     const TYPE_WEBSITE = 'website';
     const TYPE_ADDRESS = 'address';
     const TYPE_PHONE = 'phone';
+    const TYPE_SOCIAL = 'social';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -74,8 +75,26 @@ class Contact
 
     public function getApiData() : array
     {
+        $realType = $this->getType();
+        switch ($realType) {
+            case Contact::TYPE_ADDRESS:
+                $type = Contact::TYPE_ADDRESS;
+                break;
+            case Contact::TYPE_EMAIL;
+                $type = Contact::TYPE_EMAIL;
+                break;
+//            case Contact::TYPE_FACEBOOK;
+//            case Contact::TYPE_TWITTER;
+//            case Contact::TYPE_INSTAGRAM;
+//                $type = Contact::TYPE_SOCIAL;
+//                break;
+            default:
+                $type = Contact::TYPE_SOCIAL;
+                break;
+        }
+
         return array(
-            'type' => $this->getType(),
+            'type' => $type,
             'value' => $this->getValue()
         );
     }
