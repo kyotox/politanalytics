@@ -22,3 +22,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\EPImporter:
+        autowire: true
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+            $url: '%env(string:EP_IMPORT_URL)%'

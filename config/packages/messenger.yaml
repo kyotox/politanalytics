@@ -1,0 +1,7 @@
+framework:
+    messenger:
+        transports:
+            async_contact:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+        routing:
+            'App\Message\PersonContactTask': async_contact
